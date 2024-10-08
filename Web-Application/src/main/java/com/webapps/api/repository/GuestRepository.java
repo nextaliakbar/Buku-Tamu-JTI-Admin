@@ -2,12 +2,14 @@ package com.webapps.api.repository;
 
 import com.webapps.api.entity.Address;
 import com.webapps.api.entity.Guest;
+import com.webapps.api.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +19,7 @@ public interface GuestRepository extends JpaRepository<Guest, String> , JpaSpeci
     String findLastGuestById(@Param("prefix") String prefix);
 
     Optional<Guest> findFirstById(String id);
+
+    Optional<Guest> findFirstByUserAndId(User user, String id);
+
 }

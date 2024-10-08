@@ -21,7 +21,9 @@ public class CreateNeedRequest {
     @NotBlank
     private String title;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt = LocalDateTime.now();
+
+    private final LocalDateTime updatedAt = LocalDateTime.now();
 
     private String description;
 }

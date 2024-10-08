@@ -20,6 +20,9 @@ public class Need {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
     private String description;
 
     @ManyToOne

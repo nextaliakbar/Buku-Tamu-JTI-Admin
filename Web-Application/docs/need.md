@@ -1,7 +1,7 @@
 # Need API Spec
 
 ## Create Need With Admin
-Endpoint : POST/api/guests/{GuestId}/needs
+Endpoint : POST/api/admin/guests/{GuestId}/needs
 
 Request Header :
 - GUEST-BOOK-API-TOKEN : TOKEN (Mandatory)
@@ -10,7 +10,6 @@ Request Body :
 ```json
 {
   "title" : "Konsultasi",
-  "createdAt" : "2024-09-21T08:00:00;00",
   "description" : "....."
 }
 ```
@@ -20,7 +19,8 @@ Response Body (Success) :
   "data" : {
     "id" : "need id",
     "title" : "Konsultasi",
-    "createdAt" : "2024-09-21T08:00:00;00",
+    "createdAt" : "2024-09-21T08:00:00",
+    "updatedAt" : "2024-09-21T08:00:00",
     "description" : "....."
   }
 }
@@ -34,13 +34,12 @@ Response Body (Failed) :
 ```
 
 ## Create Need Without Admin
-Endpoint : POST/api/guests/{GuestId}/needs
+Endpoint : POST/api/admin/guests/{GuestId}/needs
 
 Request Body : 
 ```json
 {
   "title" : "Konsultasi",
-  "createdAt" : "2024-09-24T10:07:20",
   "description" : "....."
 }
 ```
@@ -51,6 +50,7 @@ Response Body (Success) :
     "id" : "need id",
     "title" : "Konsultasi",
     "createdAt" : "2024-09-24T10:07:20",
+    "updatedAt" : "2024-09-21T08:00:00",
     "description" : "....."
   }
 }
@@ -73,7 +73,6 @@ Request Body :
 ```json
 {
   "title" : "Konsultasi",
-  "createdAt" : "2024-09-24T10:07:20",
   "description" : "....."
 }
 ```
@@ -85,6 +84,7 @@ Response Body (Success) :
     "id" : "need id",
     "title" : "Konsultasi",
     "createdAt" : "2024-09-24T10:07:20",
+    "updatedAt" : "2024-09-21T08:00:00",
     "description" : "....."
   }
 }

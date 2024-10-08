@@ -64,7 +64,6 @@ public class NeedControllerTest {
         var needRequest = new CreateNeedRequest();
         needRequest.setTitle("Konsultasi");
         needRequest.setDescription("Konsultasi Tugas Akhir");
-        needRequest.setCreatedAt(LocalDateTime.now());
         mockMvc.perform(
         post("/api/guests/Not Found/needs")
                 .accept(MediaType.APPLICATION_JSON)
@@ -84,7 +83,6 @@ public class NeedControllerTest {
     var needRequest = new CreateNeedRequest();
     needRequest.setTitle("");
     needRequest.setDescription("Konsultasi Tugas Akhir");
-    needRequest.setCreatedAt(LocalDateTime.now());
     mockMvc.perform(
     post("/api/guests/Guest ID Test/needs")
             .accept(MediaType.APPLICATION_JSON)
@@ -104,7 +102,6 @@ public class NeedControllerTest {
         var needRequest = new CreateNeedRequest();
         needRequest.setTitle("Konsultasi");
         needRequest.setDescription("Konsultasi Tugas Akhir");
-        needRequest.setCreatedAt(LocalDateTime.now());
         mockMvc.perform(
         post("/api/guests/Guest ID Test/needs")
                 .accept(MediaType.APPLICATION_JSON)
