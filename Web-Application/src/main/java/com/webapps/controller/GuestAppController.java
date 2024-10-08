@@ -28,7 +28,7 @@ public class GuestAppController {
     @GetMapping(path = "/tambah")
     public String showInsert(Model model) {
         model.addAttribute("guest", new ModelGuest());
-        return "tamu/tambah";
+        return "tamu/input";
     }
 
     @GetMapping(path = "/edit")
