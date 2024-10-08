@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form dengan Sidebar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <aside
+        class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-blue-500 md:block"
+      >
+        <div class="py-4 text-white">
+          <!-- Ubah warna teks ke putih -->
+          <a class="ml-6 text-lg font-bold" href="#">Buku Tamu</a>
+          <ul class="mt-6">
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150"
+                href="@{/index.html}"
+              >
+                <img class="w-5 h-5" src="@{/img/home.png}" alt="Kunjungan" />
+                <span class="ml-4">Dashboard</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150"
+                href="@{/tables.html}"
+              >
+                <img
+                  class="w-5 h-5"
+                  src="@{/img/kunjungan.png}"
+                  alt="Kunjungan"
+                />
+                <span class="ml-4">Kunjungan</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150"
+                href="@{/input.html}"
+              >
+                <img class="w-5 h-5" src="@{/img/add.png}" alt="Kunjungan" />
+                <span class="ml-4">Input</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Konten Utama -->
+      <div class="flex flex-col flex-1 w-full">
+        <header class="z-10 py-4 bg-white shadow-md">
+          <div
+            class="container flex items-center justify-end h-full px-6 mx-auto text-purple-600"
+          >
+            <!-- justify-end untuk meratakan ke kanan -->
+            <div class="flex items-center space-x-4">
+              <span class="text-lg font-semibold text-blue-500">Hii Admin</span>
+              <!-- Teks "Hi Admin" -->
+              <button
+                class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+                aria-label="Account"
+                aria-haspopup="true"
+              >
+                <img
+                  class="object-cover w-8 h-8 rounded-full"
+                  src="assets/img/user.png"
+                  alt="Profile Picture"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="h-full pb-16 overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2 class="my-6 text-2xl font-semibold text-gray-700">
+              Form Input
+            </h2>
+            <div class="px-6 py-4 mb-8 bg-white rounded-lg shadow-lg">
+              <div class="mb-4">
+                <label class="block text-gray-700">Pilih Tipe</label>
+                <div class="flex items-center">
+                  <div class="mr-4">
+                    <input
+                      class="form-radio"
+                      type="radio"
+                      name="tipe"
+                      id="tipeLembaga"
+                      value="lembaga"
+                      onclick="toggleForm()"
+                      checked
+                    />
+                    <label for="tipeLembaga" class="ml-2">Lembaga</label>
+                  </div>
+                  <div>
+                    <input
+                      class="form-radio"
+                      type="radio"
+                      name="tipe"
+                      id="tipePerorangan"
+                      value="perorangan"
+                      onclick="toggleForm()"
+                    />
+                    <label for="tipePerorangan" class="ml-2">Perorangan</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Lembaga -->
+              <div id="formLembaga">
+                <h3 class="text-lg font-semibold text-gray-800">
+                  Data Perwakilan
+                </h3>
+                <div class="mb-4">
+                  <label for="namaTamu" class="block text-gray-700">Nama</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaTamu"
+                    placeholder="Jane Doe"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tempatLahir" class="block text-gray-700">
+                    Tempat Lahir
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="tempatLahir"
+                    placeholder="Tempat Lahir"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tanggalLahir" class="block text-gray-700">
+                    Tanggal Lahir
+                  </label>
+                  <input
+                    type="date"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="tanggalLahir"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="noTelp" class="block text-gray-700">
+                    No. Telp
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noTelp"
+                    placeholder="No. Telp"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="noHpWa" class="block text-gray-700">
+                    No. Hp/Wa
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noHpWa"
+                    placeholder="No. Hp/Wa"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="jabatan" class="block text-gray-700">
+                    Jabatan
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="jabatan"
+                    placeholder="Jabatan"
+                  />
+                </div>
+
+                <div class="mb-5">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Data Lembaga
+                  </h3>
+                </div>
+                <div class="mb-4">
+                  <label for="namaLembaga" class="block text-gray-700">
+                    Nama Lembaga
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="Nama Lembaga"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Lembaga</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisLokal"
+                        value="lokal"
+                        onclick="toggleVisibility()"
+                      />
+                      <label for="jenisLokal" class="ml-2">Lokal</label>
+                    </div>
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisNasional"
+                        value="nasional"
+                        onclick="toggleVisibility()"
+                      />
+                      <label for="jenisNasional" class="ml-2">Nasional</label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisInternasional"
+                        value="internasional"
+                        onclick="toggleVisibility()"
+                      />
+                      <label for="jenisInternasional" class="ml-2">
+                        Internasional
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section untuk Lokal -->
+                <div id="kabupatenSection" class="mb-4 hidden">
+                  <label for="kabupaten" class="block text-gray-700">
+                    Kabupaten
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kabupaten"
+                  >
+                    <option selected>-pilih kabupaten-</option>
+                    <option value="1">Kabupaten A</option>
+                    <option value="2">Kabupaten B</option>
+                    <option value="3">Kabupaten C</option>
+                  </select>
+                </div>
+
+                <!-- Section untuk Nasional -->
+                <div id="provinsiSection" class="mb-4 hidden">
+                  <label for="provinsi" class="block text-gray-700">
+                    Provinsi
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="provinsi"
+                  >
+                    <option selected>-pilih provinsi-</option>
+                    <option value="1">Provinsi A</option>
+                    <option value="2">Provinsi B</option>
+                    <option value="3">Provinsi C</option>
+                  </select>
+                </div>
+                <div id="kabupatenSectionNational" class="mb-4 hidden">
+                  <label for="kabupatenNational" class="block text-gray-700">
+                    Kabupaten
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kabupatenNational"
+                  >
+                    <option selected>-pilih kabupaten-</option>
+                    <option value="1">Kabupaten A</option>
+                    <option value="2">Kabupaten B</option>
+                    <option value="3">Kabupaten C</option>
+                  </select>
+                </div>
+                <div id="kecamatanSection" class="mb-4 hidden">
+                  <label for="kecamatan" class="block text-gray-700">
+                    Kecamatan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kecamatan"
+                  >
+                    <option selected>-pilih kecamatan-</option>
+                    <option value="1">Kecamatan A</option>
+                    <option value="2">Kecamatan B</option>
+                    <option value="3">Kecamatan C</option>
+                  </select>
+                </div>
+
+                <!-- Section untuk Internasional -->
+                <div id="negaraSection" class="mb-4 hidden">
+                  <label for="negara" class="block text-gray-700">Negara</label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="negara"
+                  >
+                    <option selected>-pilih negara-</option>
+                    <option value="1">Satu</option>
+                    <option value="2">Dua</option>
+                    <option value="3">Tiga</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Alamat
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+                <div class="mb-4">
+                  <label for="No Telepon" class="block text-gray-700">
+                    No Telepon
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="No Telepon"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="No Fax" class="block text-gray-700">No Fax</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="No Fax"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="keperluan" class="block text-gray-700">
+                    Keperluan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="keperluan"
+                  >
+                    <option selected>-Keperluan-</option>
+                    <option value="1">Keperluan A</option>
+                    <option value="2">Keperluan B</option>
+                    <option value="3">Keperluan C</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Keperluan
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Keperluan"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Form Perorangan -->
+              <div id="formPerorangan" class="hidden">
+                <h3 class="text-lg font-semibold text-gray-800">Data Diri</h3>
+                <div class="mb-4">
+                  <label for="nama" class="block text-gray-700">Nama</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="nama"
+                    placeholder="Nama"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tempatLahir" class="block text-gray-700">
+                    Tempat Lahir
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="tempatLahir"
+                    placeholder="Tempat Lahir"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tanggalLahir" class="block text-gray-700">
+                    Tanggal Lahir
+                  </label>
+                  <input
+                    type="date"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="tanggalLahir"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Kelamin</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisKelamin"
+                        id="kelaminLaki"
+                        value="laki-laki"
+                      />
+                      <label for="kelaminLaki" class="ml-2">Laki-laki</label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisKelamin"
+                        id="kelaminPerempuan"
+                        value="perempuan"
+                      />
+                      <label for="kelaminPerempuan" class="ml-2">
+                        Perempuan
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label for="noHpWa" class="block text-gray-700">
+                    No. HP/Wa
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noHpWa"
+                    placeholder="No. HP/Wa"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Lembaga</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisLokalPerorangan"
+                        value="lokal"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisLokalPerorangan" class="ml-2">
+                        Lokal
+                      </label>
+                    </div>
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisNasionalPerorangan"
+                        value="nasional"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisNasionalPerorangan" class="ml-2">
+                        Nasional
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisInternasionalPerorangan"
+                        value="internasional"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisInternasionalPerorangan" class="ml-2">
+                        Internasional
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="provinsiSectionPerorangan" class="mb-4 hidden">
+                  <label for="provinsiPerorangan" class="block text-gray-700">
+                    Provinsi
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="provinsiPerorangan"
+                  >
+                    <option selected>-pilih provinsi-</option>
+                    <option value="1">Provinsi A</option>
+                    <option value="2">Provinsi B</option>
+                    <option value="3">Provinsi C</option>
+                  </select>
+                </div>
+
+                <div id="kabupatenSectionPerorangan" class="mb-4 hidden">
+                  <label for="kabupatenPerorangan" class="block text-gray-700">
+                    Kabupaten
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kabupatenPerorangan"
+                  >
+                    <option selected>-pilih kabupaten-</option>
+                    <option value="1">Kabupaten A</option>
+                    <option value="2">Kabupaten B</option>
+                    <option value="3">Kabupaten C</option>
+                  </select>
+                </div>
+
+                <div id="kecamatanSectionPerorangan" class="mb-4 hidden">
+                  <label for="kecamatanPerorangan" class="block text-gray-700">
+                    Kecamatan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kecamatanPerorangan"
+                  >
+                    <option selected>-pilih kecamatan-</option>
+                    <option value="1">Kecamatan A</option>
+                    <option value="2">Kecamatan B</option>
+                    <option value="3">Kecamatan C</option>
+                  </select>
+                </div>
+
+                <div id="negaraSectionPerorangan" class="mb-4 hidden">
+                  <label for="negaraPerorangan" class="block text-gray-700">
+                    Negara
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="negaraPerorangan"
+                  >
+                    <option selected>-pilih negara-</option>
+                    <option value="1">Satu</option>
+                    <option value="2">Dua</option>
+                    <option value="3">Tiga</option>
+                  </select>
+                </div>
+
+                <script>
+                  function showSectionPerorangan() {
+                    document
+                      .getElementById("kabupatenSectionPerorangan")
+                      .classList.add("hidden");
+                    document
+                      .getElementById("provinsiSectionPerorangan")
+                      .classList.add("hidden");
+                    document
+                      .getElementById("kecamatanSectionPerorangan")
+                      .classList.add("hidden");
+                    document
+                      .getElementById("negaraSectionPerorangan")
+                      .classList.add("hidden");
+
+                    const jenisLembaga = document.querySelector(
+                      'input[name="jenisLembagaPerorangan"]:checked'
+                    );
+
+                    if (jenisLembaga) {
+                      if (jenisLembaga.value === "lokal") {
+                        document
+                          .getElementById("kabupatenSectionPerorangan")
+                          .classList.remove("hidden");
+                      } else if (jenisLembaga.value === "nasional") {
+                        document
+                          .getElementById("provinsiSectionPerorangan")
+                          .classList.remove("hidden");
+                        document
+                          .getElementById("kabupatenSectionPerorangan")
+                          .classList.remove("hidden");
+                        document
+                          .getElementById("kecamatanSectionPerorangan")
+                          .classList.remove("hidden");
+                      } else if (jenisLembaga.value === "internasional") {
+                        document
+                          .getElementById("negaraSectionPerorangan")
+                          .classList.remove("hidden");
+                      }
+                    }
+                  }
+                </script>
+
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Alamat
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="keperluan" class="block text-gray-700">
+                    Keperluan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="keperluan"
+                  >
+                    <option selected>-Keperluan-</option>
+                    <option value="1">Keperluan A</option>
+                    <option value="2">Keperluan B</option>
+                    <option value="3">Keperluan C</option>
+                  </select>
+                </div>
+
+                <div class="mb-4">
+                  <label for="deskripsiKeperluan" class="block text-gray-700">
+                    Deskripsi Keperluan
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="flex justify-end">
+                <button
+                  type="submit"
+                  class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                >
+                  Simpan
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function toggleForm() {
+        const isLembaga = document.getElementById("tipeLembaga").checked;
+        document
+          .getElementById("formLembaga")
+          .classList.toggle("hidden", !isLembaga);
+        document
+          .getElementById("formPerorangan")
+          .classList.toggle("hidden", isLembaga);
+      }
+
+      function toggleVisibility() {
+        // Untuk Lembaga
+        const jenisLembaga = document.querySelector(
+          'input[name="jenisLembaga"]:checked'
+        );
+        const isLokal = jenisLembaga && jenisLembaga.value === "lokal";
+        const isNasional = jenisLembaga && jenisLembaga.value === "nasional";
+        const isInternasional =
+          jenisLembaga && jenisLembaga.value === "internasional";
+
+        // Menampilkan atau menyembunyikan bagian sesuai jenis lembaga
+        document
+          .getElementById("kabupatenSection")
+          .classList.toggle("hidden", !isLokal);
+        document
+          .getElementById("provinsiSection")
+          .classList.toggle("hidden", !isNasional);
+        document
+          .getElementById("kabupatenSectionNational")
+          .classList.toggle("hidden", !isNasional);
+        document
+          .getElementById("kecamatanSection")
+          .classList.toggle("hidden", !isNasional);
+        document
+          .getElementById("negaraSection")
+          .classList.toggle("hidden", !isInternasional);
+      }
+    </script>
+  </body>
+</html>
