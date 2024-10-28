@@ -22,4 +22,6 @@ public class ModelNeed {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     private String description;
+
+    private ModelGuest modelGuest;
 }

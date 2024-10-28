@@ -1,4 +1,7 @@
 package com.webapps.apps;
+import com.webapps.api.entity.Guest;
+import com.webapps.api.entity.Need;
+import com.webapps.api.repository.GuestRepository;
 import com.webapps.model.ModelGuest;
 import jakarta.servlet.http.Cookie;
 import lombok.SneakyThrows;
@@ -11,7 +14,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -22,6 +29,9 @@ public class GuestAppControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private GuestRepository guestRepository;
 
     @Test
     @SneakyThrows

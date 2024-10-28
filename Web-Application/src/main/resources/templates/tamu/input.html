@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head}"></head>
+  <body>
+    <div class="flex h-screen bg-gray-50">
+      <!-- Sidebar -->
+      <aside th:replace="~{layout :: sidebar}"></aside>
+
+      <!-- Konten Utama -->
+      <div class="flex flex-col flex-1 w-full">
+        <header th:replace="~{layout :: header}"></header>
+
+        <main class="h-full pb-16 overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2 class="my-6 text-2xl font-semibold text-gray-700">
+              Form Input
+            </h2>
+            <div class="px-6 py-4 mb-8 bg-white rounded-lg shadow-lg">
+              <div class="mb-4">
+                <label class="block text-gray-700">Pilih Tipe</label>
+                <div class="flex items-center">
+                  <div class="mr-4">
+                    <input
+                      class="form-radio"
+                      type="radio"
+                      name="tipe"
+                      id="tipeLembaga"
+                      value="lembaga"
+                      onclick="toggleForm()"
+                      checked
+                    />
+                    <label for="tipeLembaga" class="ml-2">Lembaga</label>
+                  </div>
+                  <div>
+                    <input
+                      class="form-radio"
+                      type="radio"
+                      name="tipe"
+                      id="tipePerorangan"
+                      value="perorangan"
+                      onclick="toggleForm()"
+                    />
+                    <label for="tipePerorangan" class="ml-2">Perorangan</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Lembaga -->
+              <div id="formLembaga">
+                <h3 class="text-lg font-semibold text-gray-800">
+                  Data Perwakilan
+                </h3>
+                <div class="mb-4">
+                  <label for="namaTamu" class="block text-gray-700">Nama</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaTamu"
+                    placeholder="Jane Doe"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tempatLahir" class="block text-gray-700">
+                    Tempat Lahir
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="tempatLahir"
+                    placeholder="Tempat Lahir"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tanggalLahir" class="block text-gray-700">
+                    Tanggal Lahir
+                  </label>
+                  <input
+                    type="date"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="tanggalLahir"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="noTelp" class="block text-gray-700">
+                    No. Telp
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noTelp"
+                    placeholder="No. Telp"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="noHpWa" class="block text-gray-700">
+                    No. Hp/Wa
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noHpWa"
+                    placeholder="No. Hp/Wa"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="jabatan" class="block text-gray-700">
+                    Jabatan
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="jabatan"
+                    placeholder="Jabatan"
+                  />
+                </div>
+
+                <div class="mb-5">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Data Lembaga
+                  </h3>
+                </div>
+                <div class="mb-4">
+                  <label for="namaLembaga" class="block text-gray-700">
+                    Nama Lembaga
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="Nama Lembaga"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Lembaga</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisLokal"
+                        value="Lokal"
+                        onclick="showSectionLembaga()"
+                      />
+                      <label for="jenisLokal" class="ml-2">Lokal</label>
+                    </div>
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisNasional"
+                        value="Nasional"
+                        onclick="showSectionLembaga()"
+                      />
+                      <label for="jenisNasional" class="ml-2">Nasional</label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembaga"
+                        id="jenisInternasional"
+                        value="Internasional"
+                        onclick="showSectionLembaga()"
+                      />
+                      <label for="jenisInternasional" class="ml-2">
+                        Internasional
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="provinsiSectionLembaga" class="mb-4 hidden">
+                  <label for="provinsiLembaga" class="block text-gray-700">
+                    Provinsi
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="provinsiLembaga"
+                  >
+                    <option value="0" selected>-Pilih Provinsi-</option>
+                    <option
+                      th:each="province : ${provinces}"
+                      th:value="${province.id}"
+                      th:text="${province.name}"
+                    >
+                    </option>
+                  </select>
+                </div>
+
+                <div id="kabupatenSectionLembaga" class="mb-4 hidden">
+                  <label for="kabupatenLembaga" class="block text-gray-700">
+                    Kabupaten
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kabupatenLembaga"
+                  >
+                    <option value="0" selected>-Pilih Kabupaten-</option>
+                  </select>
+                </div>
+
+                <div id="kecamatanSectionLembaga" class="mb-4 hidden">
+                  <label for="kecamatanLembaga" class="block text-gray-700">
+                    Kecamatan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kecamatanLembaga"
+                  >
+                    <option value="0" selected>-Pilih Kecamatan-</option>
+                  </select>
+                </div>
+
+                <!-- Section untuk Internasional -->
+                <div id="negaraSectionLembaga" class="mb-4 hidden">
+                  <label for="negara" class="block text-gray-700">Negara</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="negaraLembaga"
+                    placeholder="Indonesia"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Alamat
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+                <div class="mb-4">
+                  <label for="No Telepon" class="block text-gray-700">
+                    No Telepon
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="No Telepon"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="No Fax" class="block text-gray-700">No Fax</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="namaLembaga"
+                    placeholder="No Fax"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="keperluan" class="block text-gray-700">
+                    Keperluan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="keperluan"
+                  >
+                    <option value="Pertemuan" selected>Pertemuan</option>
+                    <option value="Kunjungan">Kunjungan</option>
+                    <option value="Konsultasi">Konsultasi</option>
+                    <option value="Lain-lain">Lain-lain</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Keperluan
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Keperluan"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Form Perorangan -->
+              <div id="formPerorangan" class="hidden">
+                <h3 class="text-lg font-semibold text-gray-800">Data Diri</h3>
+                <div class="mb-4">
+                  <label for="nama" class="block text-gray-700">Nama</label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="nama"
+                    placeholder="Nama"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tempatLahir" class="block text-gray-700">
+                    Tempat Lahir
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="tempatLahir"
+                    placeholder="Tempat Lahir"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="tanggalLahir" class="block text-gray-700">
+                    Tanggal Lahir
+                  </label>
+                  <input
+                    type="date"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="tanggalLahir"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Kelamin</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisKelamin"
+                        id="kelaminLaki"
+                        value="laki-laki"
+                      />
+                      <label for="kelaminLaki" class="ml-2">Laki-laki</label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisKelamin"
+                        id="kelaminPerempuan"
+                        value="perempuan"
+                      />
+                      <label for="kelaminPerempuan" class="ml-2">
+                        Perempuan
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label for="noHpWa" class="block text-gray-700">
+                    No. HP/Wa
+                  </label>
+                  <input
+                    type="text"
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="noHpWa"
+                    placeholder="No. HP/Wa"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-gray-700">Jenis Lembaga</label>
+                  <div class="flex items-center">
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisLokalPerorangan"
+                        value="Lokal"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisLokalPerorangan" class="ml-2">
+                        Lokal
+                      </label>
+                    </div>
+                    <div class="mr-4">
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisNasionalPerorangan"
+                        value="Nasional"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisNasionalPerorangan" class="ml-2">
+                        Nasional
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        class="form-radio"
+                        type="radio"
+                        name="jenisLembagaPerorangan"
+                        id="jenisInternasionalPerorangan"
+                        value="Internasional"
+                        onclick="showSectionPerorangan()"
+                      />
+                      <label for="jenisInternasionalPerorangan" class="ml-2">
+                        Internasional
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="provinsiSectionPerorangan" class="mb-4 hidden">
+                  <label for="provinsiPerorangan" class="block text-gray-700">
+                    Provinsi
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="provinsiPerorangan"
+                  >
+                    <option value="0" selected>-Pilih Provinsi-</option>
+                    <option
+                      th:each="province : ${provinces}"
+                      th:value="${province.id}"
+                      th:text="${province.name}"
+                    >
+                    </option>
+                  </select>
+                </div>
+
+                <div id="kabupatenSectionPerorangan" class="mb-4 hidden">
+                  <label for="kabupatenPerorangan" class="block text-gray-700">
+                    Kabupaten
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kabupatenPerorangan"
+                  >
+                    <option value="0">-Pilih Kabupaten-</option>
+                  </select>
+                </div>
+
+                <div id="kecamatanSectionPerorangan" class="mb-4 hidden">
+                  <label for="kecamatanPerorangan" class="block text-gray-700">
+                    Kecamatan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="kecamatanPerorangan"
+                  >
+                    <option value="0" selected>-Pilih Kecamatan-</option>
+                  </select>
+                </div>
+
+                <div id="negaraSectionPerorangan" class="mb-4 hidden">
+                  <label for="negaraPerorangan" class="block text-gray-700">
+                    Negara
+                  </label>
+                  <input
+                      type="text"
+                      class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                      id="negaraPerorangan"
+                      placeholder="Indonesia"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label for="deskripsiAlamat" class="block text-gray-700">
+                    Deskripsi Alamat
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="keperluan" class="block text-gray-700">
+                    Keperluan
+                  </label>
+                  <select
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 p-2"
+                    id="keperluan"
+                  >
+                    <option value="Pertemuan" selected>Pertemuan</option>
+                    <option value="Kunjungan">Kunjungan</option>
+                    <option value="Konsultasi">Konsultasi</option>
+                    <option value="Lain-lain">Lain-lain</option>
+                  </select>
+                </div>
+
+                <div class="mb-4">
+                  <label for="deskripsiKeperluan" class="block text-gray-700">
+                    Deskripsi Keperluan
+                  </label>
+                  <textarea
+                    class="mt-1 block w-full border border-purple-300 rounded-lg shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50 placeholder-gray-400 p-2"
+                    id="deskripsiAlamat"
+                    placeholder="Deskripsi Alamat"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="flex justify-end">
+                <button
+                  type="submit"
+                  class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                >
+                  Simpan
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!--  Script For Form Lembaga  -->
+    <script>
+      function toggleForm() {
+        const isLembaga = document.getElementById("tipeLembaga").checked;
+        document
+          .getElementById("formLembaga")
+          .classList.toggle("hidden", !isLembaga);
+        document
+          .getElementById("formPerorangan")
+          .classList.toggle("hidden", isLembaga);
+      }
+
+      function showSectionLembaga() {
+        document
+                .getElementById("kabupatenSectionLembaga")
+                .classList.add("hidden");
+        document
+                .getElementById("provinsiSectionLembaga")
+                .classList.add("hidden");
+        document
+                .getElementById("kecamatanSectionLembaga")
+                .classList.add("hidden");
+        document
+                .getElementById("negaraSectionLembaga")
+                .classList.add("hidden");
+
+        const jenisLembaga = document.querySelector(
+                'input[name="jenisLembaga"]:checked'
+        );
+
+        if (jenisLembaga) {
+          if (jenisLembaga.value === "Lokal") {
+            document
+                    .getElementById("kecamatanSectionLembaga")
+                    .classList.remove("hidden");
+          } else if (jenisLembaga.value === "Nasional") {
+            document
+                    .getElementById("provinsiSectionLembaga")
+                    .classList.remove("hidden");
+            document
+                    .getElementById("kabupatenSectionLembaga")
+                    .classList.remove("hidden");
+            document
+                    .getElementById("kecamatanSectionLembaga")
+                    .classList.remove("hidden");
+          } else if (jenisLembaga.value === "Internasional") {
+            document
+                    .getElementById("negaraSectionLembaga")
+                    .classList.remove("hidden");
+          }
+        }
+      }
+
+      function getSubdistrictByRegencyId(url) {
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  if(Array.isArray(data.data)) {
+                    var subdistrictElement = document.getElementById('kecamatanLembaga');
+                    subdistrictElement.innerHTML = '';
+                    subdistrictElement.innerHTML = '<option value="0">-Pilih Kecamatan-</option>'
+                    data.data.forEach(function (subdistrict) {
+                      var option = document.createElement('option')
+                      option.value = subdistrict.id;
+                      option.text = subdistrict.name;
+                      subdistrictElement.appendChild(option);
+                    });
+                  } else {
+                    console.log("Data from API is not an array")
+                  }
+                })
+                .catch((error) => {
+                  console.log('Error:', error)
+                });
+      }
+
+      document.getElementById('jenisLokal').addEventListener('click', ()=> {
+        var url = '/api/regencies/3509/subdistricts';
+        getSubdistrictByRegencyId(url);
+      });
+
+      document.getElementById('jenisNasional').addEventListener('click', ()=> {
+        var regencyElement = document.getElementById('kabupatenLembaga');
+        var regencyId = regencyElement.value;
+        var url = '/api/regencies/'+regencyId+'/subdistricts';
+        getSubdistrictByRegencyId(url);
+      });
+
+      document.getElementById('provinsiLembaga').addEventListener('change', function() {
+        // Ambil nilai yang dipilih dari dropdown
+
+        var provinceId = this.value;
+
+        // Buat URL dengan parameter query string
+        var url = '/api/provinces/'+provinceId+'/regencies';
+
+        // Kirim request GET ke server
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  // Jika data berada di dalam properti 'data'
+                  if (Array.isArray(data.data)) {
+                    var regencyElement = document.getElementById('kabupatenLembaga');
+                    var subdistrictElement = document.getElementById("kecamatanLembaga");
+                    regencyElement.innerHTML = '';
+                    subdistrictElement.innerHTML = '';
+                    regencyElement.innerHTML = '<option value="0">-Pilih Kabupaten-</option>';
+                    subdistrictElement.innerHTML = '<option value="0">-Pilih Kecamatan-</option>'
+                    // Proses data yang berada di dalam properti 'data'
+                    data.data.forEach(function(regency) {
+                      var option = document.createElement('option');
+                      option.value = regency.id;
+                      option.text = regency.name;
+                      regencyElement.appendChild(option);
+                    });
+                  } else {
+                    console.error('Data from API is not an array');
+                  }
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+      });
+
+      document.getElementById("kabupatenLembaga").addEventListener('change', function (){
+        var regencyId = this.value;
+        var url = '/api/regencies/'+regencyId+'/subdistricts';
+        getSubdistrictByRegencyId(url);
+      });
+    </script>
+
+
+    <!--  Script For Form Perorangan  -->
+    <script>
+      function showSectionPerorangan() {
+        document
+                .getElementById("kabupatenSectionPerorangan")
+                .classList.add("hidden");
+        document
+                .getElementById("provinsiSectionPerorangan")
+                .classList.add("hidden");
+        document
+                .getElementById("kecamatanSectionPerorangan")
+                .classList.add("hidden");
+        document
+                .getElementById("negaraSectionPerorangan")
+                .classList.add("hidden");
+
+        const jenisLembaga = document.querySelector(
+                'input[name="jenisLembagaPerorangan"]:checked'
+        );
+
+        if (jenisLembaga) {
+          if (jenisLembaga.value === "Lokal") {
+            document
+                    .getElementById("kecamatanSectionPerorangan")
+                    .classList.remove("hidden");
+          } else if (jenisLembaga.value === "Nasional") {
+            document
+                    .getElementById("provinsiSectionPerorangan")
+                    .classList.remove("hidden");
+            document
+                    .getElementById("kabupatenSectionPerorangan")
+                    .classList.remove("hidden");
+            document
+                    .getElementById("kecamatanSectionPerorangan")
+                    .classList.remove("hidden");
+          } else if (jenisLembaga.value === "Internasional") {
+            document
+                    .getElementById("negaraSectionPerorangan")
+                    .classList.remove("hidden");
+          }
+        }
+      }
+
+      function getSubdistrictByRegencyPeroranganId(url) {
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  if(Array.isArray(data.data)) {
+                    var subdistrictElement = document.getElementById('kecamatanPerorangan');
+                    subdistrictElement.innerHTML = '';
+                    subdistrictElement.innerHTML = '<option value="0">-Pilih Kecamatan-</option>'
+                    data.data.forEach(function (subdistrict) {
+                      var option = document.createElement('option')
+                      option.value = subdistrict.id;
+                      option.text = subdistrict.name;
+                      subdistrictElement.appendChild(option);
+                    });
+                  } else {
+                    console.log("Data from API is not an array")
+                  }
+                })
+                .catch((error) => {
+                  console.log('Error:', error)
+                });
+      }
+
+      document.getElementById('jenisLokalPerorangan').addEventListener('click', ()=> {
+        var url = '/api/regencies/3509/subdistricts';
+        getSubdistrictByRegencyPeroranganId(url);
+      });
+
+      document.getElementById('jenisNasionalPerorangan').addEventListener('click', ()=> {
+        var regencyElement = document.getElementById('kabupatenPerorangan');
+        var regencyId = regencyElement.value;
+        var url = '/api/regencies/'+regencyId+'/subdistricts';
+        getSubdistrictByRegencyPeroranganId(url);
+      });
+
+      document.getElementById('provinsiPerorangan').addEventListener('change', function() {
+        // Ambil nilai yang dipilih dari dropdown
+
+        var provinceId = this.value;
+
+        // Buat URL dengan parameter query string
+        var url = '/api/provinces/'+provinceId+'/regencies';
+
+        // Kirim request GET ke server
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  // Jika data berada di dalam properti 'data'
+                  if (Array.isArray(data.data)) {
+                    var regencyElement = document.getElementById('kabupatenPerorangan');
+                    var subdistrictElement = document.getElementById("kecamatanPerorangan");
+                    regencyElement.innerHTML = '';
+                    subdistrictElement.innerHTML = '';
+                    regencyElement.innerHTML = '<option value="0">-Pilih Kabupaten-</option>';
+                    subdistrictElement.innerHTML = '<option value="0">-Pilih Kecamatan-</option>'
+                    // Proses data yang berada di dalam properti 'data'
+                    data.data.forEach(function(regency) {
+                      var option = document.createElement('option');
+                      option.value = regency.id;
+                      option.text = regency.name;
+                      regencyElement.appendChild(option);
+                    });
+                  } else {
+                    console.error('Data from API is not an array');
+                  }
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+      });
+
+      document.getElementById("kabupatenPerorangan").addEventListener('change', function (){
+        var regencyId = this.value;
+        var url = '/api/regencies/'+regencyId+'/subdistricts';
+        getSubdistrictByRegencyPeroranganId(url);
+      });
+    </script>
+  </body>
+</html>

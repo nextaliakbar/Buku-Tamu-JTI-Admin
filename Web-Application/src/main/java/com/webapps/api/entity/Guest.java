@@ -42,12 +42,12 @@ public class Guest {
     @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
-    @OneToMany(mappedBy = "guest")
+    @OneToMany(mappedBy = "guest", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @OneToMany(mappedBy = "guest")
+    @OneToMany(mappedBy = "guest", fetch = FetchType.EAGER)
     private List<Institution> institutions;
 
-    @OneToMany(mappedBy = "guest")
+    @OneToMany(mappedBy = "guest", fetch = FetchType.EAGER)
     private List<Need> needs;
 }

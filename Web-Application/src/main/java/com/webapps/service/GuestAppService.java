@@ -1,11 +1,17 @@
 package com.webapps.service;
 
 import com.webapps.api.entity.Guest;
+import com.webapps.api.entity.Need;
 import com.webapps.api.entity.User;
 import com.webapps.api.repository.GuestRepository;
+import com.webapps.api.repository.NeedRepository;
 import com.webapps.api.repository.UserRepository;
 import com.webapps.model.ModelGuest;
+import com.webapps.model.ModelNeed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +30,9 @@ public class GuestAppService {
     @Autowired
     private GuestRepository guestRepository;
 
+    @Autowired
+    private NeedRepository needRepository;
+
     private String generatedCustomId() {
         String prefix = "G-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyMM"))
                 + "-" + new Random().nextInt(9999) + "-";
@@ -40,11 +49,10 @@ public class GuestAppService {
         return prefix + String.format("%03d", lastIncrement + 1);
     }
 
-    public List<ModelGuest> getAll() {
-        List<Guest> guests = guestRepository.findAll();
-        return guests.stream().map(this::toModelGuest).collect(Collectors.toList());
+    public Page<ModelNeed> getAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return needRepository.findAll(pageable).map(this::toModelNeed);
     }
-
 
     public ModelGuest getByUserAndId(User user, String id) {
         Guest guest = guestRepository.findFirstByUserAndId(user, id)
@@ -99,6 +107,18 @@ public class GuestAppService {
         Guest guest = guestRepository.findFirstByUserAndId(user, id)
                 .orElseThrow(() -> new RuntimeException("Tamu tidak tersedia"));
         guestRepository.delete(guest);
+    }
+
+
+    private ModelNeed toModelNeed(Need need) {
+        return ModelNeed.builder()
+                .id(need.getId())
+                .title(need.getTitle())
+                .description(need.getDescription())
+                .createdAt(need.getCreatedAt())
+                .updatedAt(need.getUpdatedAt())
+                .modelGuest(toModelGuest(need.getGuest()))
+                .build();
     }
 
     private ModelGuest toModelGuest(Guest guest) {

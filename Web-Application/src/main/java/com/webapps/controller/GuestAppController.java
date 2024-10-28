@@ -1,9 +1,16 @@
 package com.webapps.controller;
-
+import com.webapps.api.entity.Need;
 import com.webapps.api.entity.User;
+import com.webapps.api.model.ProvinceResponse;
+import com.webapps.api.service.GuestService;
+import com.webapps.api.service.ProvinceService;
+import com.webapps.api.service.RegencieService;
+import com.webapps.api.service.SubdistrictService;
 import com.webapps.model.ModelGuest;
+import com.webapps.model.ModelNeed;
 import com.webapps.service.GuestAppService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +25,32 @@ public class GuestAppController {
     @Autowired
     private GuestAppService guestService;
 
+    @Autowired
+    private ProvinceService provinceService;
+
+    @Autowired
+    private RegencieService regencieService;
+
+    @Autowired
+    private SubdistrictService subdistrictService;
+
     @GetMapping
-    public String list(Model model) {
-        List<ModelGuest> guests = guestService.getAll();
-        model.addAttribute("guests", guests);
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page,
+    @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        Page<ModelNeed> guests = guestService.getAll(page, size);
+        model.addAttribute("guests", guests.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", guests.getTotalPages());
+        model.addAttribute("title", "Kunjungan");
         return "tamu/index";
     }
 
     @GetMapping(path = "/tambah")
     public String showInsert(Model model) {
+        List<ProvinceResponse> provinces = provinceService.list();
         model.addAttribute("guest", new ModelGuest());
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("title", "Tambah Kunjungan");
         return "tamu/input";
     }
 
